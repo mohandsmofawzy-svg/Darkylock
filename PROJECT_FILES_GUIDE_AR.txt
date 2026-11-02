@@ -1,0 +1,191 @@
+دليل ملفات مشروع Darky Lock
+============================
+
+هذا الدليل يصف الملفات الموجودة فعليًا في المستودع، مع التركيز على مسار الواجهة والتحكم بالمودم والإعدادات والعمليات الخلفية.
+
+ملفات المشروع والبناء
+---------------------
+build.gradle.kts
+إعدادات Gradle العامة ومهام توقيع APK.
+
+settings.gradle.kts
+تسجيل وحدتي التطبيق والمودم في مشروع Gradle.
+
+gradle/libs.versions.toml
+إصدارات إضافات ومكتبات Android وCompose وShizuku وCoroutines.
+
+gradle.properties
+خيارات Gradle العامة للمشروع.
+
+gradle/wrapper/gradle-wrapper.properties
+إصدار Gradle الذي يستخدمه gradlew.
+
+app/build.gradle.kts
+إعداد تطبيق Android، إصدار SDK، التبعيات، ضغط الموارد والتوقيع.
+
+modem/build.gradle.kts
+إعداد مكتبة المودم وربط مصادر Kotlin ومكتبة QRTR الأصلية.
+
+الواجهة والتطبيق
+----------------
+app/src/main/AndroidManifest.xml
+الصلاحيات والتعريف بنشاط التطبيق ومزود Shizuku؛ يجب أن تعكس مكوناته ملفات التنفيذ الفعلية.
+
+app/src/main/java/dev/mo/darkylock/MainActivity.kt
+نقطة بدء Compose، طلب الصلاحيات، استقبال إجراء إزالة الأقفال من الإشعار، وتطبيق لغة التطبيق واتجاه RTL.
+
+app/src/main/java/dev/mo/darkylock/ui/App.kt
+التنقل بين Main وBands وCell lock وManu عبر شريط علوي مضغوط وقاعدة تنقل عائمة، منتقي الشرائح، تنبيه تأكيد الشريحة، الانتقالات والتحديث الحي.
+
+app/src/main/java/dev/mo/darkylock/ui/MainViewModel.kt
+يربط الواجهة بمتحكم المودم، ينفذ عمليات المستخدم، يحفظ التفضيلات، ويمنع أوامر جديدة عند الخروج أو عند تعذر التحقق من اختيار الشريحة. قبل Dynamic Band Switching يحدّث حالة المودم ثم يستعيد اختيارات المستخدم ويفحص قفل الخلية الفعلي؛ تُقرأ حالة اختيار المشغّل منفصلة ولا تمنع تبديل الباندات ولا يغيّر التطبيق وضع اختيار المشغّل. يختار نطاقات LTE أو NR الموافقة للتقنية النشطة فقط. مع عدة نطاقات، يبدل القفل ويتحقق من تطبيقه والحوامل الخادمة؛ ومع نطاق واحد، يستخدم تحديثات قراءة فقط دون إرسال أوامر تعديل للباند. مدة الدورة محفوظة وتتغير بين الدورات دون إنشاء مؤقتات متداخلة.
+
+app/src/main/java/dev/mo/darkylock/ui/Model.kt
+نماذج حالة الواجهة واختيارات الخلايا والنطاقات واللغة.
+
+app/src/main/java/dev/mo/darkylock/ui/Translation.kt
+ترجمة نصوص Compose للإنجليزية والعربية، بما يشمل تسميات وحالات وتحذيرات Dynamic Band Switching، مع عزل اتجاه النص المختلط في RTL لحماية الأرقام والقيم التقنية.
+
+app/src/main/java/dev/mo/darkylock/ui/BandsScreen.kt
+واجهة خطة النطاقات بملخص إجمالي ثم بطاقة Dynamic Band Switching بأيقونة Darky متحركة اللون، وفواصل جاهزة (10/15/30/45/60 ثانية) ومدة مخصصة محفوظة؛ عند اختيار نطاق واحد يعمل الوضع بقراءات حالة فقط دون إرسال أوامر تعديل للباند. تليها بطاقات المجموعات وبطاقات النطاقات المستطيلة وأدوات التحديد/المفضلة والقفل، ثم إعدادات وضع الشبكة و5G.
+
+app/src/main/java/dev/mo/darkylock/ui/theme/Theme.kt
+لوحة Material الداكنة بخلفية سوداء ودرجات النبيتي للأزرار والعناصر التفاعلية، مع إبقاء سلم ألوان الإشارة مستقلًا.
+
+app/src/main/res/drawable/ic_launcher_foreground.xml
+رسم أمامي أصلي لأرنب بتعبير ابتسامة ماكرة ونبيتي داكن، يستخدمه رمز التطبيق وزر Dynamic.
+
+app/src/main/java/dev/mo/darkylock/ui/ManuScreen.kt
+لوحة AT تتضمن اختصارات قراءة/إعداد المودم. أوامر AT+CFUN محظورة على مساري التطبيق ومساعد Root/Shizuku ولا تُرسل.
+
+app/src/main/java/dev/mo/darkylock/ui/CellScreen.kt
+واجهة تبدأ بحالة قفل الخلية الحالية، ثم الخلايا القريبة القابلة للتعبئة، ونموذج إنشاء القفل، واختيار PLMN في نهاية مسار الشاشة.
+
+app/src/main/java/dev/mo/darkylock/ui/MainScreen.kt
+لوحة رئيسية تعرض اتصال الشبكة أولًا، ثم حالة الأقفال وإجراءات Band plan/Cell lock، وتركيب الحوامل، وتشخيص RTT اختياريًا، ثم تفاصيل المودم الثانوية.
+
+app/src/main/java/dev/mo/darkylock/ui/ManuScreen.kt
+مركز تحكم يعرض مسار المودم والشريحة والصلاحية، ويجمع إجراءات صيانة الراديو كبطاقات، ثم اختيار الواجهة والتفضيلات ووحدات AT/QMI ومعلومات التشخيص والخروج الآمن.
+
+app/src/main/java/dev/mo/darkylock/ui/Components.kt
+عناصر Compose المشتركة، ومنها ألوان البطاقات وحدودها، مجموعات الخيارات، شبكة بطاقات باند مستطيلة بعلامة اختيار وحدود واضحة، الشارات واللوحات، ونمط LTR لإدخالات الأرقام والمعرّفات في RTL.
+
+app/src/main/java/dev/mo/darkylock/ui/Darky.kt
+رسوم وحركات شخصية Darky ومؤشر التحديث.
+
+app/src/main/java/dev/mo/darkylock/ui/theme/Theme.kt
+لوحة التطبيق الداكنة الموحدة: خلفية فحمية باردة، تفاعل بلون فيروزي، ولمسات كهرمانية مع ألوان مستقلة للإشارة.
+
+app/src/main/res/values/strings.xml
+موارد النص الافتراضية، ومنها اسم التطبيق.
+
+app/src/main/res/values-ar/strings.xml
+موارد اسم التطبيق للغة العربية.
+
+app/src/main/java/dev/mo/darkylock/data/LockNotifier.kt
+إشعار حالة الأقفال وإجراء Unlock all الذي يعالجه MainActivity وMainViewModel.
+
+app/src/main/java/dev/mo/darkylock/data/Updates.kt
+فحص الإصدارات مع مهلات اتصال وقراءة محددة. عنوان API متروك فارغًا عمدًا في LATEST_RELEASE_API_URL داخل Updates.newerThan؛ يوضع الرابط الصالح مستقبلًا في ذلك الثابت، ولا تُفتح روابط غير صالحة.
+
+الوصول والصلاحيات
+-----------------
+app/src/main/java/dev/mo/darkylock/shizuku/RootOrShizuku.kt
+اختيار الوصول المتاح، Root أو Shizuku، وبدء عميل المساعد.
+
+app/src/main/java/dev/mo/darkylock/shizuku/ShizukuClient.kt
+التواصل مع Shizuku وتشغيل المساعد عبر الخدمة أو shell.
+
+app/src/main/java/dev/mo/darkylock/shizuku/ShizukuService.kt
+واجهة خدمة Shizuku التي تشغّل أوامر المساعد.
+
+مكتبة المودم وقفل الترددات
+--------------------------
+modem/src/main/java/dev/mo/darkylock/modem/ModemController.kt
+منسق الاتصال والتحديث والأقفال والراديو. يسلسل التغيير وقراءة الحالة وAT وQMI، ويرفض الأوامر بعد بدء الإغلاق أو عندما يكون ربط الشريحة غير مؤكد. يحدّث حالة أقفال الخلية والشبكة إلى UNKNOWN أثناء القراءة أو عند فشلها، ويؤكد CLEAR/ACTIVE من ردود QMI وAT وRadio HAL؛ كما يطابق مخبأ قفل القنوات مع القراءة الفعلية وينظف إدخالات Cell Lock التي لم تعد موجودة. يتيح قفل نطاق مؤقتًا عبر persistOverride=false ليستخدمه التبديل الديناميكي دون تغيير تفضيل الاستمرار بعد إعادة التشغيل. يحفظ Subscription ID وSIM slot والاسم ويتحقق منهما عند الاستعادة؛ يستخدم واجهات Android العامة ولا يعتمد على Phone ID غير المتاح في SDK العام. كما يراقب تغيّر الاشتراكات. لا يعيد أوامر MediaTek التغييرية على مسار آخر عند فشل ملتبس.
+
+modem/src/main/java/dev/mo/darkylock/modem/Model.kt
+نماذج الحالة والواجهات المدعومة وبيانات الجهاز والنطاقات، بما في ذلك حالات قفل الخلية/الشبكة الثلاث: نشط، خالٍ، وغير معروف، وبيانات الاشتراك والمنفذ وطلب تأكيد الشريحة عند فقدان موثوقية الربط.
+
+modem/src/main/java/dev/mo/darkylock/modem/HelperStarter.kt
+العقد الذي يحدد طريقة بدء عميل المساعد وبيانات الوصول.
+
+modem/src/main/java/dev/mo/darkylock/data/PrivilegedClient.kt
+واجهة start/call/stop المشتركة لعملاء Root وShizuku.
+
+modem/src/main/java/dev/mo/darkylock/data/HelperClient.kt
+بروتوكول JSON بين التطبيق وRootServer، توزيع الردود حسب رقم الطلب، المهلات، وإرسال exit وإكمال الطلبات المعلقة عند الإغلاق.
+
+modem/src/main/java/dev/mo/darkylock/data/RootClient.kt
+بدء RootServer عبر su والتحقق من صلاحية root.
+
+modem/src/main/java/dev/mo/darkylock/data/Cells.kt
+قراءة الخلايا المرئية ودمج تقارير مصادر الراديو.
+
+modem/src/main/java/dev/mo/darkylock/data/Carriers.kt
+تجميع الحوامل وقياسات إشارة الشبكة.
+
+modem/src/main/java/dev/mo/darkylock/core/Bands.kt
+جداول وتحويلات نطاقات وقنوات GSM وWCDMA وLTE وNR؛ مصدر الحسابات التي تعرضها الواجهة.
+
+modem/src/main/java/dev/mo/darkylock/core/Json.kt
+مساعدات التعامل مع JSON المستخدم في بروتوكول الأوامر.
+
+modem/src/main/java/dev/mo/darkylock/root/RootServer.kt
+نقطة تنفيذ المساعد ذي الصلاحيات، توجيه الأوامر إلى واجهة الشركة المصنّعة، وإرجاع JSON.
+
+modem/src/main/java/dev/mo/darkylock/root/Aosp.kt
+عمليات Android Radio HAL، اختيار وضع الشبكة، أقفال القنوات وPLMN وإعادة تشغيل الراديو.
+
+modem/src/main/java/dev/mo/darkylock/root/Qualcomm.kt
+عمليات Qualcomm الخاصة بالنطاقات وRAT والخلايا وPLMN عبر QMI.
+
+modem/src/main/java/dev/mo/darkylock/root/Qmi.kt
+عميل QMI الأصلي وفتح/إغلاق اتصال QRTR.
+
+modem/src/main/java/dev/mo/darkylock/root/Mediatek.kt
+أوامر MediaTek AT لقراءة/تطبيق أقنعة EPBSE وEPBSEH وقفل الخلايا وRAT. يعتمد عدد الحقول على رد المودم ويرفض الردود الناقصة.
+
+modem/src/main/java/dev/mo/darkylock/root/At.kt
+إرسال أوامر AT إلى منفذ المودم مع مهلة محددة وإغلاق واصف الملف.
+
+modem/src/main/java/dev/mo/darkylock/root/Pixel.kt
+إعدادات قفل النطاقات ووضع 5G الخاصة بأجهزة Pixel Tensor.
+
+modem/src/main/java/dev/mo/darkylock/root/Samsung.kt
+عمليات وضع 5G الخاصة بخدمات Samsung.
+
+modem/src/main/java/dev/mo/darkylock/root/Sys.kt
+قراءة خصائص النظام وتشغيل أوامر shell محددة المهلة.
+
+modem/src/main/java/dev/mo/darkylock/root/PhysicalChannels.kt
+قراءة قنوات الراديو الفعلية ومعلوماتها من Android.
+
+modem/src/main/java/dev/mo/darkylock/root/OemHook.kt
+اكتشاف والتواصل مع واجهات OEM hook.
+عند اختيار ril:1 يمر الأمر من هنا إلى واجهة الشركة المصنّعة بدل فتح TTY.
+
+modem/src/main/java/dev/mo/darkylock/root/OemCallback.kt
+استقبال نتائج OEM hook وإرجاعها لطبقة الأمر.
+
+modem/src/main/cpp/CMakeLists.txt
+إعداد بناء مكتبة QRTR الأصلية.
+
+modem/src/main/cpp/qrtr.c
+تنفيذ الربط الأصلي منخفض المستوى لبروتوكول QRTR الذي يستخدمه QMI.
+
+ملفات المراجع
+--------------
+README.md
+شرح استخدام التطبيق والوصول المدعوم وملاحظات السلامة والبناء.
+
+TESTED_DEVICES.md
+الأجهزة وواجهات المودم التي جرى اختبارها فعليًا.
+
+ملاحظة حول المهام الخلفية
+-------------------------
+تحديث الخلايا الحي يعمل أثناء عرض Main أو Cell lock كل ثانيتين، ويتخطى القراءة عند انشغال متحكم المودم. ترتيب الأوامر هو: الشاشة ← MainViewModel ← ModemController ← HelperClient ← RootServer ← Aosp أو Qualcomm أو Mediatek أو Pixel بحسب الواجهة المكتشفة. على MediaTek عبر ril:1 يمر الأمر عبر Mediatek ثم At وOemHook؛ وبعد التغيير تحدث الواجهة الحالة مرة واحدة.
+
+Dynamic Band Switching مع نطاقين أو أكثر يستخدم واجهة القفل الحالية لكل نطاق منفرد بفاصل محفوظ افتراضيه 30 ثانية، وخيارات جاهزة 10/15/30/45/60 ثانية أو مدة مخصصة بين 10 و3600 ثانية. يدعم مسارات Qualcomm QMI وMediaTek AT وAndroid Radio HAL، ولا يعمل على Pixel في وضع تبديل الأقفال لأن قفل الباند فيه يعيد تشغيل الراديو. عند اختيار نطاق واحد يعمل بوضع قراءة دورية فقط: لا يرسل قفلًا أو فك قفل ولا يفرض handover ولا يضمن تسريع الاتصال. تغيير الأقفال المتعددة قد يؤدي إلى إعادة اختيار الشبكة أو انقطاع البيانات. اختيار المشغّل اليدوي مستقل ولا يتغير تلقائيًا. إيقاف Dynamic لا يفك القفل الأخير.
+
+أوامر AT+CFUN أزيلت من واجهة Manu، ويحظرها التطبيق أيضًا عند الإرسال اليدوي عبر متحكم المودم أو مساعد Root/Shizuku.
