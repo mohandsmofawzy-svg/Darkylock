@@ -23,7 +23,7 @@
 
 | Live Network Status | Bands Plan | Cell Lock | Control Room & Menu |
 | :---: | :---: | :---: | :---: |
-| <img src="docs/ui/main-screen.jpg" width="220" alt="Live Network Status"/> | <img src="docs/ui/bands-screen.jpg" width="220" alt="Bands Plan"/> | <img src="docs/ui/cell-lock-screen.jpg" width="220" alt="Cell Lock"/> | <img src="docs/ui/menu-screen.jpg" width="220" alt="Control Room / Menu"/> |
+| <img src="main-screen.jpg" width="220" alt="Live Network Status"/> | <img src="docs/ui/bands-screen.jpg" width="220" alt="Bands Plan"/> | <img src="docs/ui/cell-lock-screen.jpg" width="220" alt="Cell Lock"/> | <img src="menu-screen.jpg" width="220" alt="Control Room / Menu"/> |
 | **Main Dashboard**<br>Displays active SIM state, serving technology (5G/LTE), signal metrics & live lock status. | **Band Selection**<br>Configure preferred LTE/5G NR band masks, custom profiles & Dynamic Band Switching. | **Cell Tower Pinning**<br>Scan nearby towers (PCI/ARFCN) and lock modem to target cells instantly. | **System & Diagnostics**<br>Manage Root/Shizuku, radio maintenance, AT/QMI console & update settings. |
 
 </div>
