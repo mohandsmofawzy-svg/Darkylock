@@ -1,3 +1,4 @@
+/* Copyright (C) 2026 Mohamed Mahmoud (Darkylock). All rights reserved. */
 @file:Suppress("FunctionName")
 
 package dev.mo.darkylock.ui

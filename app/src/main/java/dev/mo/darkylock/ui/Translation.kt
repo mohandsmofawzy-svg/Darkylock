@@ -34,7 +34,7 @@ private val arabicText =
         "Requires an active Shizuku connection." to "يتطلب اتصال Shizuku نشطًا.",
         "Enable Game Priority" to "تفعيل أولوية الألعاب",
         "Drop-Fix" to "تقليل هبوط الإطارات",
-        "this button fix drop frame only" to "هذا الزر مخصص لتقليل هبوط الإطارات فقط",
+        "Stabilizes frame rate by periodically applying system performance mode during gameplay." to "يعمل على استقرار معدل الإطارات من خلال تطبيق وضع الأداء في النظام أثناء اللعب.",
         "Android performance mode enabled for the selected package(s)." to "تم تفعيل وضع الأداء في Android للحزم المحددة.",
         "Android standard game mode selected for the selected package(s)." to "تم اختيار وضع الألعاب القياسي في Android للحزم المحددة.",
         "Drop-Fix failed." to "تعذر تفعيل تقليل هبوط الإطارات.",

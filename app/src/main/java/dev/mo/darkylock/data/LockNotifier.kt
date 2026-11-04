@@ -62,7 +62,7 @@ object LockNotifier {
             Notification
                 .Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_stat_darky_sleeping)
-                .setContentTitle("Darky Lock · keeping watch")
+                .setContentTitle("Darky Lock · Active")
                 .setContentText(lines.joinToString(", "))
                 .setStyle(
                     Notification.BigTextStyle()

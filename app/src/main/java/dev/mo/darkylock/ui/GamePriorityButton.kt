@@ -136,9 +136,9 @@ fun GamePriorityButton(
             )
         }
         Text(
-            translateUiText("this button fix drop frame only", language),
-            style = androidx.compose.material3.MaterialTheme.typography.labelSmall,
-            color = Color.Red,
+            translateUiText("Stabilizes frame rate by periodically applying system performance mode during gameplay.", language),
+            style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
+            color = androidx.compose.material3.MaterialTheme.colorScheme.primary,
         )
         Text(
             translateUiText(
@@ -163,7 +163,7 @@ fun GamePriorityButton(
             shapes = ButtonDefaults.shapes(),
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text(translateUiText("Diagnose 60 FPS", language))
+            Text(translateUiText("Diagnose FPS", language))
         }
         diagnostics?.let { result ->
             GamePerformanceDiagnosticsCard(result, language)

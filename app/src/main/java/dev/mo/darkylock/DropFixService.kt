@@ -1,3 +1,4 @@
+/* Copyright (C) 2026 Mohamed Mahmoud (Darkylock). All rights reserved. */
 package dev.mo.darkylock
 
 import android.app.Notification
@@ -107,7 +108,7 @@ class DropFixService : Service() {
                 try {
                     while (isActive) {
                         modem?.setGamePerformanceMode(packages, true)
-                        delay(20_000)
+                        delay(20000)
                     }
                 } catch (e: CancellationException) {
                     throw e

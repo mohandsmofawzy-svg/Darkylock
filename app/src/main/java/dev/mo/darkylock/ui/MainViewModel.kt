@@ -1,3 +1,4 @@
+/* Copyright (C) 2026 Mohamed Mahmoud (Darkylock). All rights reserved. */
 package dev.mo.darkylock.ui
 
 import android.app.Application

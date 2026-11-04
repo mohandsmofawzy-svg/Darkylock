@@ -1,3 +1,4 @@
+/* Copyright (C) 2026 Mohamed Mahmoud (Darkylock). All rights reserved. */
 package dev.mo.darkylock.root
 
 import android.system.Os
@@ -61,7 +62,7 @@ object RootServer {
 
     private fun loadNative(libDir: String?) {
         if (libLoaded || libDir.isNullOrEmpty()) return
-        libError = runCatching { System.load("$libDir/libdarkyqrtr.so") }.exceptionOrNull()
+        libError = runCatching { System.load("$libDir/ libdarkyqrtr.so") }.exceptionOrNull()
         libLoaded = libError === null
     }
 
@@ -264,11 +265,11 @@ object RootServer {
             runCommand("cmd", "deviceidle", "whitelist", "+$packageName")
 
             // أ. مخاطبة مدير الألعاب الداخلي للنظام لفرض وضع الأداء وتحديد 90 FPS
-            runCommand(executable = "cmd", arguments = arrayOf("game", "set", "--mode", "2", "--fps", "90", packageName))
+           runCommand(executable = "cmd", arguments = arrayOf("game", "set","--mode","2","--fps", "90", packageName))
 
             // هـ. فرض أقصى معدل تحديث عام للشاشة (Peak Refresh Rate)
-            runCommand(executable = "settings", arguments = arrayOf("put", "global", "peak_refresh_rate", "120.0"))
-            runCommand(executable = "settings", arguments = arrayOf("put", "global", "min_refresh_rate", "120.0"))
+        //    runCommand(executable = "settings", arguments = arrayOf("put", "global", "peak_refresh_rate", "120.0"))
+          //  runCommand(executable = "settings", arguments = arrayOf("put", "global", "min_refresh_rate", "120.0"))
 
             android.util.Log.d("GamePriority", "Successfully applied priority for: $packageName")
         }
@@ -286,8 +287,8 @@ object RootServer {
 
         packages.forEach { packageName ->
             // تنفيذ أمر الأداء وتثبيت الـ 90 إطار لكل حزمة بشكل مباشر ودوري
-            runCommand(executable = "cmd", arguments = arrayOf("game", "set", "--mode", "2", "--fps", "90", packageName))
-        }
+            runCommand(executable = "cmd", arguments = arrayOf("game", "set","--mode","2","--fps", "90", packageName))
+         }
         return JSONObject().put("packageNames", JSONArray(packages))
     }
 
