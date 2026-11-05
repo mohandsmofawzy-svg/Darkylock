@@ -10,7 +10,6 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Platform-Android_11.0%2B-brightgreen.svg" alt="Android Version">
-  <img src="https://img.shields.io/badge/Target_API-37-blue.svg" alt="Target API">
   <img src="https://img.shields.io/badge/License-Apache_2.0-orange.svg" alt="License">
   <img src="https://img.shields.io/badge/Privileges-Root_%2F_Shizuku-red.svg" alt="Privileges">
 </p>
@@ -23,7 +22,6 @@
 
 | Live Network Status | Bands Plan | Cell Lock | Control Room & Menu |
 | :---: | :---: | :---: | :---: |
-| <img src="docs/ui/main-screen.jpg" width="220" alt="Live Network Status"/> | <img src="docs/ui/bands-screen.jpg" width="220" alt="Bands Plan"/> | <img src="docs/ui/cell-lock-screen.jpg" width="220" alt="Cell Lock"/> | <img src="docs/ui/menu-screen.jpg" width="220" alt="Control Room / Menu"/> |
 | **Main Dashboard**<br>Displays active SIM state, serving technology (5G/LTE), signal metrics & live lock status. | **Band Selection**<br>Configure preferred LTE/5G NR band masks, custom profiles & Dynamic Band Switching. | **Cell Tower Pinning**<br>Scan nearby towers (PCI/ARFCN) and lock modem to target cells instantly. | **System & Diagnostics**<br>Manage Root/Shizuku, radio maintenance, AT/QMI console & update settings. |
 
 </div>
@@ -86,7 +84,6 @@
 ## 📋 Requirements & Permissions
 
 * **Android Version:** Android 11.0 (API Level 30) or higher.
-* **Target SDK:** API level 37.
 * **Access Level:** Root access (Magisk / KernelSU / APatch) **OR** [Shizuku](https://shizuku.rikka.app/) installed and granted.
 
 ### Manifest Declarations:
@@ -108,7 +105,6 @@
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/mohandsmofawzy-svg/Darkylock.git
    cd darkylock
    ```
 
@@ -121,24 +117,17 @@
    keyPassword=YourKeyPassword
    ```
 
-3. **Build a signed Release Android App Bundle (.aab):**
    ```bash
    ./gradlew bundleRelease
    ```
-   Release builds require a real upload keystore configured in `keystore.properties`; the build will not fall back to the debug key. The `.aab` file is generated at `app/build/outputs/bundle/release/app-release.aab`.
 
 ---
 
 ## 🔒 Privacy & Compliance
 
-Darkylock is designed to process cellular and performance data locally:
 * **0% Data Collection:** No personal data, location history, SIM numbers, or telemetry are collected or stored outside your device.
 * **100% Local Execution:** All network diagnostics and modem commands operate strictly on-device.
-* **Transparent Permissions:** The app explains the permissions used by cellular diagnostics and notifications. Google Play approval depends on the final app behavior, declarations, store listing, and policy review.
 
-**Support:** [mohandsmofawzy@gmail.com](mailto:mohandsmofawzy@gmail.com)
-
-Read our [Privacy Policy](https://github.com/mohandsmofawzy-svg/Darkylock/blob/main/privacy-policy.html). This link will work after the policy file is pushed to the public `main` branch.
 
 ---
 
