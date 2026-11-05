@@ -62,7 +62,7 @@ object RootServer {
 
     private fun loadNative(libDir: String?) {
         if (libLoaded || libDir.isNullOrEmpty()) return
-        libError = runCatching { System.load("$libDir/ libdarkyqrtr.so") }.exceptionOrNull()
+        libError = runCatching { System.load("$libDir/libdarkyqrtr.so") }.exceptionOrNull()
         libLoaded = libError === null
     }
 

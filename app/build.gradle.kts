@@ -6,7 +6,7 @@ import java.security.KeyStore
 import java.security.PrivateKey
 import java.security.cert.X509Certificate
 import java.util.Properties
-
+import java.io.FileInputStream
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -47,7 +47,7 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("release")
         }
     }
 
@@ -69,6 +69,16 @@ android {
     packaging {
         // The root helper System.load() libdarkyqrtr.so from nativeLibraryDir, so it must be extracted.
         jniLibs.useLegacyPackaging = true
+    }
+}
+
+val verifyReleaseSigning = tasks.register<VerifyReleaseSigningTask>("verifyReleaseSigning") {
+    releaseSigningConfigured.set(releaseSigning != null)
+}
+
+tasks.configureEach {
+    if (name == "packageReleaseBundle" || name == "packageRelease") {
+        dependsOn(verifyReleaseSigning)
     }
 }
 
@@ -104,6 +114,18 @@ dependencies {
     implementation(libs.shizuku.api)
     implementation(libs.shizuku.provider)
     debugImplementation(libs.compose.ui.tooling)
+}
+
+abstract class VerifyReleaseSigningTask : DefaultTask() {
+    @get:Input
+    abstract val releaseSigningConfigured: Property<Boolean>
+
+    @TaskAction
+    fun verify() {
+        check(releaseSigningConfigured.get()) {
+            "Release signing is not configured. Create keystore.properties with your upload keystore details."
+        }
+    }
 }
 
 abstract class SignWithLineageTask : DefaultTask() {

@@ -50,12 +50,12 @@ app/src/main/java/dev/mo/darkylock/ui/BandsScreen.kt
 واجهة خطة النطاقات بملخص إجمالي ثم بطاقة Dynamic Band Switching بأيقونة Darky متحركة اللون، وفواصل جاهزة (10/15/30/45/60 ثانية) ومدة مخصصة محفوظة؛ عند اختيار نطاق واحد يعمل الوضع بقراءات حالة فقط دون إرسال أوامر تعديل للباند. تليها بطاقات المجموعات وبطاقات النطاقات المستطيلة وأدوات التحديد/المفضلة والقفل، ثم إعدادات وضع الشبكة و5G.
 
 app/src/main/java/dev/mo/darkylock/ui/theme/Theme.kt
-لوحة Material الداكنة بخلفية سوداء ودرجات النبيتي للأزرار والعناصر التفاعلية، مع إبقاء سلم ألوان الإشارة مستقلًا.
+لوحة Material داكنة بخلفية سوداء ولمسات وردية وذهبية، مع إبقاء سلم ألوان الإشارة مستقلًا.
 
 app/src/main/res/drawable/ic_launcher_foreground.xml
 رسم أمامي أصلي لأرنب بتعبير ابتسامة ماكرة ونبيتي داكن، يستخدمه رمز التطبيق وزر Dynamic.
 
-app/src/main/java/dev/mo/darkylock/ui/ManuScreen.kt
+app/src/main/java/dev/mo/darkylock/ui/ManuSection.kt
 لوحة AT تتضمن اختصارات قراءة/إعداد المودم. أوامر AT+CFUN محظورة على مساري التطبيق ومساعد Root/Shizuku ولا تُرسل.
 
 app/src/main/java/dev/mo/darkylock/ui/CellScreen.kt
@@ -64,7 +64,7 @@ app/src/main/java/dev/mo/darkylock/ui/CellScreen.kt
 app/src/main/java/dev/mo/darkylock/ui/MainScreen.kt
 لوحة رئيسية تعرض اتصال الشبكة أولًا، ثم حالة الأقفال وإجراءات Band plan/Cell lock، وتركيب الحوامل، وتشخيص RTT اختياريًا، ثم تفاصيل المودم الثانوية.
 
-app/src/main/java/dev/mo/darkylock/ui/ManuScreen.kt
+app/src/main/java/dev/mo/darkylock/ui/ManuSection.kt
 مركز تحكم يعرض مسار المودم والشريحة والصلاحية، ويجمع إجراءات صيانة الراديو كبطاقات، ثم اختيار الواجهة والتفضيلات ووحدات AT/QMI ومعلومات التشخيص والخروج الآمن.
 
 app/src/main/java/dev/mo/darkylock/ui/Components.kt
@@ -72,9 +72,6 @@ app/src/main/java/dev/mo/darkylock/ui/Components.kt
 
 app/src/main/java/dev/mo/darkylock/ui/Darky.kt
 رسوم وحركات شخصية Darky ومؤشر التحديث.
-
-app/src/main/java/dev/mo/darkylock/ui/theme/Theme.kt
-لوحة التطبيق الداكنة الموحدة: خلفية فحمية باردة، تفاعل بلون فيروزي، ولمسات كهرمانية مع ألوان مستقلة للإشارة.
 
 app/src/main/res/values/strings.xml
 موارد النص الافتراضية، ومنها اسم التطبيق.
