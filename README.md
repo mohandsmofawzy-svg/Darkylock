@@ -22,6 +22,7 @@
 
 | Live Network Status | Bands Plan | Cell Lock | Control Room & Menu |
 | :---: | :---: | :---: | :---: |
+| <img src="docs/google-play/screenshots/01-main.png" width="180" alt="Darkylock main dashboard"/> | <img src="docs/google-play/screenshots/02-bands.png" width="180" alt="Darkylock band selection"/> | <img src="docs/google-play/screenshots/03-cell-lock.png" width="180" alt="Darkylock cell lock"/> | <img src="docs/google-play/screenshots/04-menu.png" width="180" alt="Darkylock control room"/> |
 | **Main Dashboard**<br>Displays active SIM state, serving technology (5G/LTE), signal metrics & live lock status. | **Band Selection**<br>Configure preferred LTE/5G NR band masks, custom profiles & Dynamic Band Switching. | **Cell Tower Pinning**<br>Scan nearby towers (PCI/ARFCN) and lock modem to target cells instantly. | **System & Diagnostics**<br>Manage Root/Shizuku, radio maintenance, AT/QMI console & update settings. |
 
 </div>
