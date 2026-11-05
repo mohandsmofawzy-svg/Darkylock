@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Darkylock</title>
+    <style>
+        :root {
+            --primary: #1e88e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 16px;
+        }
+
+        .developer-info {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.35rem;
+            margin-top: 28px;
+            margin-bottom: 12px;
+        }
+
+        p, li {
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #0f172a;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #10b981;
+            color: #022c22;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Privacy Policy for Darkylock</h1>
+        <div class="developer-info">
+            <strong>Application:</strong> Darkylock<br>
+            <strong>Developer:</strong> Mohamed Mahmoud<br>
+            <strong>Effective Date:</strong> November 5, 2026<br>
+            <span class="badge">100% On-Device Privacy Guaranteed</span>
+        </div>
+
+        <p>Thank you for choosing <strong>Darkylock</strong>. Your privacy and data security are fundamental to our mission. This Privacy Policy details our principles and practices regarding data handling, permissions, and security when you use our application.</p>
+
+        <h2>1. Zero Personal Data Collection</h2>
+        <p>Darkylock is designed with privacy-first architecture. <strong>We do not collect, transmit, store, or share any personal, sensitive, or diagnostic data from your device.</strong> All operations, configuration settings, cellular signal analyses, and performance optimizations are processed strictly locally on your device.</p>
+        <ul>
+            <li>No analytics or tracking SDKs are integrated into Darkylock.</li>
+            <li>No user accounts, login credentials, or identity information are required or collected.</li>
+            <li>No personal identifiers, device identifiers, or telemetry are transmitted to external servers.</li>
+        </ul>
+
+        <h2>2. Android Permissions and Purpose of Use</h2>
+        <p>Darkylock requests specific Android permissions strictly to deliver its core network lock and performance optimization features. Below is a detailed breakdown of permissions and their purposes:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Permission</th>
+                    <th>Required For / Core Purpose</th>
+                    <th>Data Handling</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>android.permission.READ_PHONE_STATE</code></td>
+                    <td>Reads SIM slot status and active subscription mapping to match modem interfaces on multi-SIM devices.</td>
+                    <td>Processed strictly in memory on-device. Never stored or shared.</td>
+                </tr>
+                <tr>
+                    <td><code>android.permission.ACCESS_FINE_LOCATION</code><br><code>android.permission.ACCESS_COARSE_LOCATION</code></td>
+                    <td>Required by Android Telephony APIs (<code>TelephonyManager.getAllCellInfo</code>) to scan and display current cell PCI, ARFCN, and signal metrics.</td>
+                    <td>Used solely for displaying live cellular metrics to the user. Location data is never recorded, tracked, or sent anywhere.</td>
+                </tr>
+                <tr>
+                    <td><code>android.permission.POST_NOTIFICATIONS</code></td>
+                    <td>Displays ongoing status notifications when network band locks, cell locks, or Drop-Fix service are actively running.</td>
+                    <td>Notification status is local to the device UI.</td>
+                </tr>
+                <tr>
+                    <td><code>android.permission.FOREGROUND_SERVICE</code><br><code>FOREGROUND_SERVICE_SPECIAL_USE</code></td>
+                    <td>Runs the <code>DropFixService</code> in the foreground to keep user-requested Android game performance mode active during gameplay.</td>
+                    <td>Local background thread execution. No background data collection.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Elevated Privileges (Root & Shizuku)</h2>
+        <p>Darkylock provides optional advanced functionality utilizing Root or Shizuku elevated access for interacting with system modem controllers (Qualcomm, MediaTek, Samsung, Pixel) and native game performance modes:</p>
+        <ul>
+            <li><strong>Local Scope Only:</strong> Commands executed via Root or Shizuku run strictly on your local device to communicate with hardware interfaces (e.g., QRTR sockets, AT commands, or system game mode settings).</li>
+            <li><strong>No Data Export:</strong> Elevated access is never used to read, inspect, or transfer user files, personal data, or private app information.</li>
+            <li><strong>User Control:</strong> Access must be explicitly granted and can be revoked by the user at any time through Root manager (Magisk/KernelSU/APatch) or the Shizuku manager app.</li>
+        </ul>
+
+        <h2>4. Data Storage & Security</h2>
+        <p>Any app preferences (such as selected favorite bands or language choice) are stored locally in private application storage via Android <code>SharedPreferences</code>. This data remains on your physical device, is isolated from other apps, and is automatically cleared if you uninstall the application.</p>
+
+        <h2>5. External Services and Third-Party Links</h2>
+        <p>Darkylock does not contain third-party ad networks, tracking services, or commercial SDKs. The app may include an optional manual release update checker that queries public GitHub API endpoints. If enabled, this check retrieves only public release version numbers and does not transmit any user data.</p>
+
+        <h2>6. Children's Privacy</h2>
+        <p>Darkylock is a general utility application intended for mobile network configuration and performance optimization. It does not target children under the age of 13 and does not knowingly collect data from children.</p>
+
+        <h2>7. Changes to This Privacy Policy</h2>
+        <p>We may update our Privacy Policy periodically to reflect app updates or regulatory requirements. Any changes will be posted on this page with an updated effective date.</p>
+
+        <h2>8. Contact Information</h2>
+        <p>If you have any questions, feedback, or concerns regarding this Privacy Policy or Darkylock, please contact:</p>
+        <p>
+            <strong>Developer:</strong> Mohamed Mahmoud<br>
+            <strong>App:</strong> Darkylock<br>
+            <strong>Support email:</strong> <a href="mailto:mohandsmofawzy@gmail.com">mohandsmofawzy@gmail.com</a><br>
+            <strong>GitHub Repository:</strong> <a href="https://github.com/mohandsmofawzy-svg/Darkylock" target="_blank" rel="noopener">Darkylock on GitHub</a>
+        </p>
+
+        <footer>
+            &copy; 2026 Mohamed Mahmoud - Darkylock. All rights reserved.
+        </footer>
+    </div>
+</body>
+</html>
